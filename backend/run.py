@@ -9,14 +9,14 @@ app = create_app()
 
 if __name__ == '__main__':
     port = int(os.environ.get('BACKEND_PORT', 5000))
-    debug = os.environ.get('FLASK_DEBUG', 'true').lower() == 'true'
     
     print(f"🚀 Starting Mood Music Player Backend on port {port}")
-    print(f"🔧 Debug mode: {debug}")
     print("📱 Make sure to start the React frontend on port 3000")
     
     app.run(
         host='0.0.0.0',
         port=port,
-        debug=debug
+        debug=False,
+        use_reloader=False,
+        threaded=True
     )

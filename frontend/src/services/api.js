@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5001/api';
 
 // Create axios instance with default config
 const apiClient = axios.create({
@@ -96,7 +96,9 @@ export const getSpotifyAuthUrl = async () => {
  */
 export const handleSpotifyCallback = async (code) => {
   try {
+    console.log('Sending callback with code:', code.substring(0, 20) + '...');
     const response = await apiClient.post('/spotify/callback', { code });
+    console.log('Callback response:', response.data);
     return response.data;
   } catch (error) {
     console.error('Spotify callback failed:', error);

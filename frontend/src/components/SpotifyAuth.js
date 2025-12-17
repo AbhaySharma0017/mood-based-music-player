@@ -35,7 +35,9 @@ const SpotifyAuth = ({ onAuthSuccess, onError }) => {
       setAuthUrl(response.auth_url);
     } catch (error) {
       console.error('Failed to get auth URL:', error);
-      onError('Failed to initialize Spotify authentication');
+      if (onError) {
+        onError('Failed to initialize Spotify authentication');
+      }
     } finally {
       setIsLoading(false);
     }

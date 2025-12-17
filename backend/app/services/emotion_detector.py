@@ -84,10 +84,10 @@ class EmotionDetector:
             # Find the mood with highest confidence
             dominant_mood = max(mapped_emotions.items(), key=lambda x: x[1])
             mood = dominant_mood[0]
-            confidence = dominant_mood[1] / 100.0  # Convert percentage to decimal
+            confidence = float(dominant_mood[1] / 100.0)  # Convert to Python float
             
-            # Normalize all emotions to decimals
-            normalized_emotions = {k: v / 100.0 for k, v in mapped_emotions.items()}
+            # Normalize all emotions to decimals and convert to Python float
+            normalized_emotions = {k: float(v / 100.0) for k, v in mapped_emotions.items()}
             
             logger.info(f"Emotion detection successful: {mood} ({confidence:.2f})")
             

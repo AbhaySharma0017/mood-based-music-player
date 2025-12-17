@@ -120,6 +120,7 @@ class SpotifyService:
             Dictionary with token info or error
         """
         try:
+            logger.info(f"Attempting to exchange code for token (code length: {len(authorization_code)})")
             sp_oauth = SpotifyOAuth(
                 client_id=self.client_id,
                 client_secret=self.client_secret,
@@ -127,7 +128,7 @@ class SpotifyService:
                 scope=self.scope
             )
             
-            token_info = sp_oauth.get_access_token(authorization_code)
+            token_info = sp_oauth.get_access_token(authorization_code, as_dict=True, check_cache=False)
             
             if token_info:
                 logger.info("Successfully obtained Spotify access token")

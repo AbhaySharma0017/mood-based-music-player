@@ -10,8 +10,12 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     
-    # Enable CORS for React frontend
-    CORS(app, origins=[app.config['FRONTEND_URL']])
+    # Enable CORS for React frontend with credentials support
+    CORS(app, 
+         origins=['http://localhost:3000', 'http://127.0.0.1:3000'], 
+         supports_credentials=True,
+         allow_headers=['Content-Type', 'Authorization'],
+         methods=['GET', 'POST', 'OPTIONS'])
     
     # Register blueprints/routes
     from app.routes import api_bp
